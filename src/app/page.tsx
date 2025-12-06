@@ -1,6 +1,5 @@
-import styles from './page.module.scss';
-
 import Chat from '@/widgets/chat/ui';
+import styles from './page.module.scss';
 
 export default function Home() {
 	return (

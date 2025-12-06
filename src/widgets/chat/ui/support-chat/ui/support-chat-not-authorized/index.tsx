@@ -8,6 +8,7 @@ import { setOpenChatType } from '@/widgets/chat/model/slice';
 
 const SupportChatNotAuthorized = () => {
 	const appDispatch = useAppDispatch();
+
 	return (
 		<Box className={styles.supportChat}>
 			<Box className={styles.supportChatHeader}>
