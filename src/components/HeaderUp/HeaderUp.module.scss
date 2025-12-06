@@ -1,0 +1,31 @@
+.getbonus {
+    border: rem(1) solid #C7F5FC; 
+    border-radius:  0 0 rem(20) rem(20);
+    margin-bottom: rem(28);
+    &__main {
+    display: flex;
+    justify-content: space-between;
+    padding-block: rem(26);
+    padding-inline: rem(40);
+    &-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        column-gap: rem(231);
+    }
+    &-title {
+        color: #FFFFFF;
+        font-size: rem(20);
+        font-weight: 500;
+        letter-spacing: 0%;
+        line-height: auto;
+        text-transform: uppercase;
+    }
+    &-registrationLink {
+        font-size: rem(20);
+        color: #FFFFFF4d;
+        font-weight: 500;
+        letter-spacing: 0%;
+        line-height: auto;
+    }
+    }
+}

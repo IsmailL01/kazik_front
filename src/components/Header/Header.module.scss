@@ -1,0 +1,79 @@
+.header {
+
+    box-shadow: 
+        -20px 20px 25px -10px rgba(0, 0, 0, 0.6),
+        20px 20px 25px -10px rgba(0, 0, 0, 0.6);
+    border-radius: 0 0 24px 24px; 
+    position: relative;
+    z-index: 10;
+margin-bottom: rem(40);
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding-inline: rem(30);
+        padding-block: rem(12);
+
+        &-logoImg {
+            align-items: center;
+            display: flex;
+            justify-content: flex-start;
+            column-gap: rem(25);
+        }
+
+        &-logoName {
+            font-size: rem(42);
+            color: #ffff;
+            font-weight: 800;
+            letter-spacing: 0%;
+            line-height: normal;
+        }
+        &-buttonList {
+            align-items: center;
+            display: flex;
+            column-gap: rem(10);
+        }
+        &-login {
+          color: #ffff;
+          font-weight: 700;
+          font-size: rem(18);
+          line-height: auto;
+          letter-spacing: -1%;
+          background-color: #6D6D6D;
+          border-radius: rem(12);
+          border: rem(1) solid #C7F5FC;
+          padding: rem(14) rem(14);
+
+        }
+        &-singin {
+          color: #ffff;
+          font-weight: 700;
+          font-size: rem(18);
+          line-height: auto;
+          letter-spacing: -1%;
+           border-radius: rem(12);
+          border: rem(1) solid #C7F5FC;
+          padding: rem(14) rem(14); 
+          background: linear-gradient(90deg, #3E45BE 0%, #795DD7 100%);
+        }
+ 
+ 
+        &-balanceup {
+          border-radius: rem(100);
+          border: rem(1) solid #C7F5FC;
+          padding: rem(14) rem(42); 
+          background: linear-gradient(90deg, #3E45BE 0%, #795DD7 100%);
+        color: #FFFFFF;
+            font-size: rem(18);
+            font-weight: 400;
+            letter-spacing: 1%;
+            line-height: auto;
+            align-items: center;
+            justify-content: center;
+        }
+    &-headerMenu {
+        display: flex;
+        align-items: center;
+        column-gap: rem(20);
+    }
+    }
+}
