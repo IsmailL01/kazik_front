@@ -1,0 +1,122 @@
+
+.wrapper {
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+}
+
+.balanceButton {
+    appearance: none;
+    outline: none;
+    font-family: inherit;
+    color: #FFFFFF; 
+    border: rem(2) solid transparent;
+    border-radius: rem(100);
+    background: 
+        linear-gradient(#2A3C73, #2A3C73) padding-box, 
+        linear-gradient(165deg, #C7F7FC 0%, #9C8D84 55%, #CA5CF7 100%) border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+        column-gap: rem(5);  
+        padding: rem(15) rem(22) rem(15) rem(33);
+
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    white-space: nowrap; 
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.balanceValue { 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: rem(8); 
+    
+    color: #FFFFFF;
+    font-size: rem(18);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.arrowIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    
+
+    width: rem(28);
+    height: rem(28);
+}
+
+
+.active .arrowIcon {
+    transform: rotate(180deg);
+}
+
+
+
+.dropdownList {
+    position: absolute;
+    top: calc(100% + rem(8)); 
+    right: 0; 
+    width: rem(300); 
+    background: rgba(42, 60, 115, 0.98); 
+    backdrop-filter: blur(10px);
+    border-radius: rem(12);
+    border: rem(1) solid rgba(199, 247, 252, 0.1);
+    box-shadow: 0 rem(10) rem(30) rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    padding: rem(5) 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(12) rem(20);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.selected {
+    background: rgba(199, 247, 252, 0.15);
+}
+
+.itemBalance {
+    color: #FFFFFF;
+    font-size: rem(16);
+    font-weight: 500;
+}
+
+.itemCurrency {
+    display: flex;
+    align-items: center;
+    column-gap: rem(8);
+}
+
+.itemCode {
+    color: #C7F5FC;
+    font-size: rem(14);
+    font-weight: 700;
+    text-transform: uppercase;
+    width: rem(40); 
+    text-align: right;
+}

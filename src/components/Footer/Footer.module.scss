@@ -1,0 +1,93 @@
+.footer {
+        background: linear-gradient(180deg, rgba(116, 96, 238, 0.8) 0%, rgba(88, 76, 237, 0.6) 100%);
+        margin-top: rem(168);
+ &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        column-gap: rem(198);
+        padding-top: rem(42);
+        padding-bottom: rem(70);
+        &-left {
+                display: flex;
+                flex-direction: column;
+                row-gap: rem(28);
+        }
+       
+
+        &-innerLogo {
+                width: rem(100);
+                height: rem(108);
+        }
+        &-inner {
+             width: rem(100);
+             height: rem(108);    
+        } 
+        &-innerСurrencyList {
+                display: flex;
+                column-gap: rem(24);
+        }
+        &-innerСurrencyItem {
+               display: flex;
+               flex-direction: column;
+               row-gap: rem(9);
+               align-items: center; 
+        }
+        &-innerСurrencyItemCrupto {
+             width: rem(38);
+             height: rem(38);  
+        } 
+
+        &-innerСurrencyItemName {
+                font-size: rem(18);
+                font-weight: 700;
+                letter-spacing: 0;
+                line-height: auto;
+                color: #ffff;
+        }
+        &-wrapper-innerLoginandTranslat {
+          display: flex;
+          column-gap: rem(19);
+
+        }
+         &-innerLogin {
+          border-radius: rem(100);
+          border: rem(1) solid #C7F5FC;
+          padding: rem(14) rem(42); 
+          background: linear-gradient(90deg, #3E45BE 0%, #795DD7 100%);
+            color: #FFFFFF;
+            font-size: rem(18);
+            font-weight: 400;
+            letter-spacing: 1%;
+            line-height: auto;
+            align-items: center;
+            justify-content: center;
+        }
+     
+        &-innerLoginandTranslat {
+                align-items: center;
+                display: flex;
+                column-gap: rem(19);
+        }
+        &-right {
+                display: flex;
+                column-gap: rem(184);
+        }
+        &-rightPathnameItem {
+                display: flex;
+                flex-direction: column;
+                row-gap: rem(10);
+                color: #ffff;
+                font-size: rem(16);
+                font-weight: 400;
+                line-height: auto;
+                letter-spacing: 0;
+        }
+        &-rightPathnameListSocials {
+                display: flex;
+                flex-direction: column;
+                row-gap: rem(20);
+                width: rem(50);
+                height: rem(50);
+        }
+ }
+}

@@ -2,9 +2,9 @@
 @use '../helpers/media' as *;
 
 :root {
-  --bg-container-width: 1380px;
+  --bg-container-width: 1540px;
   --small-container-width: 1147px;
-  --container-padding-x: #{rem(16)};
+  --container-padding-x: #{rem(306)};
   --bg-color: linear-gradient(90deg, #2A3C74 0%, #151D2E 100%);
   --font-family-base: var(--font-proxima-nova), sans-serif;
 
