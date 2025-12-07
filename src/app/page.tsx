@@ -2,7 +2,6 @@
 
 import HeaderUpGetbonus from '@/components/HeaderUp/HeaderUpGetbonus';
 import styles from './page.module.scss';
-
 import Chat from '@/widgets/chat/ui';
 import Header from '@/components/Header/Header';
 import SlideBar from '@/components/SlideBar/SlideBar';
@@ -10,6 +9,8 @@ import Footer from '@/components/Footer/Footer';
 import ImageCarousel from '@/components/ImageCarousel/ImageCarousel';
 import GameNavigation from '@/components/GameNavigation/GameNavigation';
 import Stages from '@/components/Stages/Stages';
+import NewsPage from '@/components/CarouselNews/CarouselNews';
+import SlotsCarousel from '@/components/SlotsCarousel/SlotsCarousel';
 
 export default function Home() {
 	return (
@@ -27,16 +28,14 @@ export default function Home() {
               
                 <main className={styles.mainContent}>
                     <ImageCarousel />
+                    <SlotsCarousel />
                     <GameNavigation />
                     <Stages />
+                    <NewsPage />
                 </main>
 
             </div>
-
-           
             <Chat />
-
-         
             <Footer />
 		</>
 	);

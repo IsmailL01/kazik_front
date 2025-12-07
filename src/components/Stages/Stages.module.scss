@@ -11,7 +11,7 @@
   padding: rem(20) rem(28);
   font-family: 'Inter', sans-serif;
   box-sizing: border-box;
-  margin-bottom: rem(52); 
+  margin-bottom: rem(40); 
 }
 
 .sectionTitle {
@@ -152,13 +152,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: rem(15) rem(75);
+  padding: rem(13) rem(75);
   border-radius: rem(100);
   background-color: #554aff; 
   color: white;
   text-decoration: none;
   font-weight: 400;
-  font-size: rem(24);
+  font-size: rem(20);
   transition: background-color 0.2s, color 0.2s;
   max-width: rem(195);
   border: none;
