@@ -11,6 +11,7 @@ import GameNavigation from '@/components/GameNavigation/GameNavigation';
 import Stages from '@/components/Stages/Stages';
 import NewsPage from '@/components/CarouselNews/CarouselNews';
 import SlotsCarousel from '@/components/SlotsCarousel/SlotsCarousel';
+import RecentWinnings from '@/components/RecentWinnings/RecentWinnings';
 
 export default function Home() {
 	return (
@@ -32,6 +33,7 @@ export default function Home() {
                     <SlotsCarousel />
                     <Stages />
                     <NewsPage />
+                    <RecentWinnings />
                 </main>
 
             </div>
