@@ -6,9 +6,12 @@ $text-color: #ffffff;
 $line-color: rgba(255, 255, 255, 0.1); 
 
 .container {
+    margin-left: 20px; 
+  margin-right: 28px;
+  max-width: 1574px; 
   width: 100%;
   max-width: rem(1586);
-  padding: rem(20) rem(28);
+ 
   font-family: 'Inter', sans-serif;
   color: $text-color;
   box-sizing: border-box;

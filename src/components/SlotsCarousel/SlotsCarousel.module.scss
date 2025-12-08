@@ -1,51 +1,63 @@
-.section {
-  padding: 40px 0;
-  // background-color: #0f172a; // При необходимости
-}
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
+    margin-left: 20px; 
+  margin-right: 28px;
+  max-width: 1574px; 
+  width: 100%;
+  max-width: rem(1586);
+  
+  box-sizing: border-box;
+  margin-bottom: rem(40); 
+  margin-left: auto;
+  margin-right: auto;
 }
 
-// Шапка (Заголовок + Кнопки)
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap; 
+  font-size: rem(36);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: rem(20);
+}
+
+
 .headerWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-}
-
-.sectionTitle {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0;
+  margin-bottom: rem(20); 
+  .sectionTitle {
+    margin-bottom: 0;
+  }
 }
 
 .controlsGroup {
   display: flex;
-  gap: 12px;
+  gap: rem(12);
 }
 
 .navButton {
-  background: transparent;
-  border: 1px solid #ccc; 
-  border-radius: 50%;     
-  width: 40px;
-  height: 40px;
+  width: rem(30);
+  height: rem(30);
+  border-radius: 50%;
+  border: none;
+  background-color: #3E30E9;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s;
+  padding: 0;
 
   &:hover {
-    background: #f0f0f0; 
-    border-color: #999;
+    opacity: 0.8;
   }
 }
 
 .carouselRoot {
-  // Если нужно задать высоту или отступы для самой ленты карусели
+
 }
+
+

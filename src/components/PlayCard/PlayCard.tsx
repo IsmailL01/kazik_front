@@ -1,6 +1,6 @@
 'use client'; 
 
-import React from 'react';
+import React, { useState } from 'react'; 
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './PlayCard.module.scss';
@@ -18,11 +18,20 @@ interface PlayCardProps {
 }
 
 const PlayCard: React.FC<PlayCardProps> = ({ item, onInfoClick }) => {
-    
+    // 2. Создаем состояние для лайка
+    const [isLiked, setIsLiked] = useState(false);
+
     const handleInfoClick = (e: React.MouseEvent) => {
         e.preventDefault(); 
         e.stopPropagation(); 
         onInfoClick(item.id);
+    };
+
+    // 3. Обработчик клика по сердечку
+    const handleLikeClick = (e: React.MouseEvent) => {
+        e.preventDefault(); 
+        e.stopPropagation(); 
+        setIsLiked(!isLiked);
     };
 
     return (
@@ -38,23 +47,28 @@ const PlayCard: React.FC<PlayCardProps> = ({ item, onInfoClick }) => {
                         className={styles.image}
                     />
 
-                    {/* Оверлей: Затемнение + Кнопка Play + Сердечко */}
+                    {/* Оверлей */}
                     <div className={styles.overlay}>
                         
-                        {/* Иконка сердечка (слева сверху) */}
-                        <div className={styles.heartIcon}>
+                        {/* 4. Иконка сердечка (теперь интерактивная) */}
+                        <div 
+                            className={styles.heartIcon} 
+                            onClick={handleLikeClick} 
+                            style={{ cursor: 'pointer' }} 
+                        >
                             <Image 
-                                src="/icons/heart.svg" // ВСТАВЬТЕ ВАШ ПУТЬ К ИКОНКЕ СЕРДЦА
-                                alt="Like" 
+                                src={isLiked ? "/heart-filled.svg" : "/heart.svg"} 
+                                alt={isLiked ? "Unlike" : "Like"} 
                                 width={24} 
                                 height={24} 
+                                className={isLiked ? styles.likedHeart : ''}
                             />
                         </div>
 
                         {/* Центральная зеленая кнопка Play */}
                         <div className={styles.playButton}>
                             <Image 
-                                src="/icons/play-triangle.svg" // ВСТАВЬТЕ ВАШ ПУТЬ К ИКОНКЕ ТРЕУГОЛЬНИКА
+                                src="/play-triangle.svg" 
                                 alt="Play" 
                                 width={16} 
                                 height={16} 
@@ -66,7 +80,7 @@ const PlayCard: React.FC<PlayCardProps> = ({ item, onInfoClick }) => {
                 </div>
             </Link>
 
-            {/* Кнопка с вопросом (справа сверху) */}
+            {/* Кнопка с вопросом */}
             <button 
                 className={styles.infoButton} 
                 onClick={handleInfoClick}

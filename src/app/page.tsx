@@ -28,8 +28,8 @@ export default function Home() {
               
                 <main className={styles.mainContent}>
                     <ImageCarousel />
-                    <SlotsCarousel />
                     <GameNavigation />
+                    <SlotsCarousel />
                     <Stages />
                     <NewsPage />
                 </main>
