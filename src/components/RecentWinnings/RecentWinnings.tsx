@@ -32,10 +32,10 @@ const MOCK_DATA: BetItem[] = Array(8).fill(null).map((_, i) => ({
     user: 'Hidden',
     time: '9:10 AM',
     betAmount: i % 2 === 0 ? 5.7685400 : 15000,
-    betCurrencyIcon: i % 2 === 0 ? '/coins/btc.svg' : '/coins/eth.svg', 
+    betCurrencyIcon: i % 2 === 0 ? '/btc.svg' : '/eth.svg', 
     coefficient: '2,4x',
     payout: i % 3 === 0 ? -1.506570 : 5.7685400,
-    payoutCurrencyIcon: i % 2 === 0 ? '/coins/btc.svg' : '/coins/eth.svg',
+    payoutCurrencyIcon: i % 2 === 0 ? '/btc.svg' : '/eth.svg',
     status: i % 3 === 0 ? 'loss' : 'win', 
 }));
 
