@@ -12,19 +12,21 @@ interface EmblaInstance {
   scrollNext: () => void;
 }
 
-// Пример данных
+
 const slotsList: PlayCardItem[] = [
   { id: 1, imageSrc: '/slot1.svg', linkHref: '/game/slot-1', title: 'Slot Game 1' },
   { id: 2, imageSrc: '/slot1.svg', linkHref: '/game/slot-2', title: 'Slot Game 2' },
   { id: 3, imageSrc: '/slot1.svg', linkHref: '/game/slot-3', title: 'Slot Game 3' },
   { id: 4, imageSrc: '/slot1.svg', linkHref: '/game/slot-4', title: 'Slot Game 4' },
   { id: 5, imageSrc: '/slot1.svg', linkHref: '/game/slot-5', title: 'Slot Game 5' },
+  { id: 6, imageSrc: '/slot1.svg', linkHref: '/game/slot-6', title: 'Slot Game 6' },
+  { id: 7, imageSrc: '/slot1.svg', linkHref: '/game/slot-7', title: 'Slot Game 7' },
+  { id: 8, imageSrc: '/slot1.svg', linkHref: '/game/slot-8', title: 'Slot Game 8' },
 ];
 
 export default function SlotsCarousel() {
   const [embla, setEmbla] = useState<EmblaInstance | null>(null);
 
-  // Навигация карусели
   const handleScrollPrev = useCallback(() => {
     if (embla) embla.scrollPrev();
   }, [embla]);
@@ -33,10 +35,8 @@ export default function SlotsCarousel() {
     if (embla) embla.scrollNext();
   }, [embla]);
 
-  // Обработчик клика на знак вопроса (логику открытия модалки добавите потом снаружи)
   const handleInfoClick = (id: number) => {
     console.log('Клик по info ID:', id);
-    // Здесь можно вызвать props.openModal(id) или изменить глобальный стейт
   };
 
   return (
@@ -69,8 +69,14 @@ export default function SlotsCarousel() {
             getEmblaApi={(instance) => setEmbla(instance as unknown as EmblaInstance)}
             withIndicators={false}
             withControls={false}
-            slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }} 
-            slideGap="md"
+            slideGap="24px"
+            slideSize={{ 
+              base: '100%',        
+              sm: '50%',          
+              md: '33.333333%',    
+              lg: '20%',         
+              xl: '16.666666%'     
+            }} 
             classNames={{
               root: styles.carouselRoot,
             }}

@@ -7,7 +7,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import '@mantine/carousel/styles.css';
 import classes from './ImageCarousel.module.scss';
 
-// ЛУЧШИЙ СПОСОБ: Массив объектов
+
 const slidesData = [
 	{
 		id: 1,

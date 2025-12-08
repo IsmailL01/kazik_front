@@ -1,10 +1,7 @@
-/* PlayCard.module.scss */
-
 .card {
   position: relative;
   width: 240px;
   height: 300px;
-  /* Убираем скрытие, чтобы кнопка вопроса могла визуально выделяться */
   overflow: visible; 
 }
 
@@ -19,11 +16,8 @@
   position: relative;
   width: 100%;
   height: 100%;
-  /* Скругляем все углы картинки */
-  border-radius: 20px; 
-  /* Обрезаем картинку, чтобы она не вылезала за радиус */
+  border-radius: 26px; 
   overflow: hidden; 
-  /* Фикс для Safari */
   transform: translateZ(0); 
 }
 
@@ -41,8 +35,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Темный фон 60% */
-  opacity: 1; /* Скрыто по умолчанию */
+  background-color: rgba(0, 0, 0, 0.6); 
+  opacity: 0; 
   transition: opacity 0.3s ease-in-out;
   
   display: flex;
@@ -50,11 +44,7 @@
   align-items: center;
   z-index: 10;
 
-  /* --- МАГИЯ ВЫРЕЗА --- */
-  /* Создаем прозрачный круг в правом верхнем углу (top right).
-     transparent 45px -> Радиус выреза. 
-     Если вырез мал/велик, меняйте число 45px.
-  */
+
 }
 
 .card:hover .overlay {
@@ -63,9 +53,11 @@
 
 /* --- Кнопка Play (Центр) --- */
 .playButton {
-  background-color: #82E372; /* Зеленый цвет */
-  padding: 12px 32px;
-  border-radius: 50px;
+  font-size: rem(20);
+  font-weight: 400;
+  background-color: #7FE282; 
+  padding:12px 18px ;
+  border-radius: 63px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -100,11 +92,15 @@
 /* --- Кнопка Инфо (Правый верхний угол) --- */
 .infoButton {
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 0; 
-  width: 45px;  
-  height: 45px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  z-index: 12;
+  cursor: pointer;
+  width: 30px;  
+  height: 30px;
   
   border-radius: 50%;
   background-color: #3E30E9;
@@ -114,7 +110,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 20; /* Лежит поверх всего */
+  z-index: 20; 
 }
 
 .iconImage {
