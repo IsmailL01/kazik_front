@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@mantine/carousel": "^8.3.9",
     "@mantine/charts": "^8.3.9",
     "@mantine/code-highlight": "^8.3.9",
@@ -28,6 +29,7 @@
     "@tiptap/pm": "^3.11.0",
     "@tiptap/react": "^3.11.0",
     "@tiptap/starter-kit": "^3.11.0",
+    "axios": "^1.13.2",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
     "embla-carousel": "^8.6.0",
@@ -36,13 +38,20 @@
     "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-hook-form": "^7.68.0",
     "react-redux": "^9.2.0",
     "recharts": "^3.5.0",
     "socket.io-client": "^4.8.1",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
+    "@types/passport-google-oauth20": "^2.0.17",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/passport-steam": "^1.0.6",
+    "@types/passport-twitter": "^1.0.40",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",

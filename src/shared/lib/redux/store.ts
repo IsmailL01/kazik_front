@@ -1,3 +1,4 @@
+import { authSliceReducer } from '@/entities/auth/model/authSlice';
 import { supportChatReducer } from '@/widgets/chat/model/slice';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -5,6 +6,7 @@ export const makeStore = () => {
 	return configureStore({
 		reducer: {
 			supportChat: supportChatReducer,
+			auth: authSliceReducer,
 		},
 	});
 };
