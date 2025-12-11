@@ -40,7 +40,7 @@ const SOCIALS = [
 const Footer = () => {
     return (
         <div className={styles.footer}>
-            <div className={clsx(styles.footer__wrapper, 'container')}>
+            <div className={clsx(styles.footer__wrapper, styles.container)}>
                 
                 {/* ЛЕВАЯ ЧАСТЬ */}
                 <div className={styles['footer__wrapper-left']}>
