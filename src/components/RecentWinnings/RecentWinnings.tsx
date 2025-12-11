@@ -2,10 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import clsx from 'clsx'; // Заменили classnames на clsx
+import clsx from 'clsx'; 
 import styles from './RecentWinnings.module.scss';
-
-// --- Интерфейсы ---
 
 export interface BetItem {
     id: string | number;
@@ -25,7 +23,6 @@ interface RecentWinningsProps {
     data?: BetItem[]; 
 }
 
-// --- Пример данных (Mock Data) ---
 const MOCK_DATA: BetItem[] = Array(8).fill(null).map((_, i) => ({
     id: i,
     gameName: 'Roulette',
@@ -57,7 +54,6 @@ const RecentWinnings: React.FC<RecentWinningsProps> = ({
                 {TABS.map((tab) => (
                     <button
                         key={tab}
-                        // Используем clsx вместо classNames
                         className={clsx(styles.tabButton, {
                             [styles.active]: activeTab === tab
                         })}
@@ -72,11 +68,22 @@ const RecentWinnings: React.FC<RecentWinningsProps> = ({
             <div className={styles.table}>
                 {/* Шапка таблицы */}
                 <div className={styles.headerRow}>
+                    {/* Game - виден всегда */}
                     <div className={styles.cell}>Game</div>
-                    <div className={styles.cell}>User</div>
-                    <div className={styles.cell}>Time</div>
-                    <div className={clsx(styles.cell, styles.alignRight)}>Bet amount</div>
-                    <div className={clsx(styles.cell, styles.alignRight)}>Coefficient</div>
+                    
+                    {/* User - скрыт на мобильном */}
+                    <div className={clsx(styles.cell, styles.colUser)}>User</div>
+                    
+                    {/* Time - скрыт на планшете и мобильном */}
+                    <div className={clsx(styles.cell, styles.colTime)}>Time</div>
+                    
+                    {/* Bet Amount - скрыт на мобильном */}
+                    <div className={clsx(styles.cell, styles.colBet, styles.alignRight)}>Bet amount</div>
+                    
+                    {/* Coefficient - скрыт на мобильном */}
+                    <div className={clsx(styles.cell, styles.colCoeff, styles.alignRight)}>Coefficient</div>
+                    
+                    {/* Payout - виден всегда */}
                     <div className={clsx(styles.cell, styles.alignRight)}>Payout</div>
                 </div>
 
@@ -91,17 +98,17 @@ const RecentWinnings: React.FC<RecentWinningsProps> = ({
                             </div>
 
                             {/* User */}
-                            <div className={styles.cell}>
+                            <div className={clsx(styles.cell, styles.colUser)}>
                                 <span className={styles.hiddenUser}>{item.user}</span>
                             </div>
 
                             {/* Time */}
-                            <div className={styles.cell}>
+                            <div className={clsx(styles.cell, styles.colTime)}>
                                 <span className={styles.time}>{item.time}</span>
                             </div>
 
                             {/* Bet Amount */}
-                            <div className={clsx(styles.cell, styles.alignRight)}>
+                            <div className={clsx(styles.cell, styles.colBet, styles.alignRight)}>
                                 <div className={styles.amountWrapper}>
                                     <span className={styles.amountValue}>
                                         {item.betAmount.toLocaleString()}
@@ -119,7 +126,7 @@ const RecentWinnings: React.FC<RecentWinningsProps> = ({
                             </div>
 
                             {/* Coefficient */}
-                            <div className={clsx(styles.cell, styles.alignRight)}>
+                            <div className={clsx(styles.cell, styles.colCoeff, styles.alignRight)}>
                                 <span className={styles.coefficient}>{item.coefficient}</span>
                             </div>
 
@@ -130,7 +137,8 @@ const RecentWinnings: React.FC<RecentWinningsProps> = ({
                                     [styles.loss]: item.status === 'loss',
                                 })}>
                                     <span className={styles.amountValue}>
-                                        {item.payout > 0 ? '+' : ''}{item.payout.toLocaleString()}
+                                        {item.payout > 0 && item.status === 'win' ? '+' : ''}
+                                        {item.payout.toLocaleString()}
                                     </span>
                                     
                                     <div className={styles.currencyIcon}>

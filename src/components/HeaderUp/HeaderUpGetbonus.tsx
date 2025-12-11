@@ -12,7 +12,6 @@ const HeaderUpGetbonus = () => {
         <>
             <div className={styles.getbonus}>
                 <div className={styles.getbonus__main}>
-                    <div className={styles['getbonus__main-wrapper']}>
                         <div className={styles['getbonus__main-title']}>
                             The best conditions for an exciting start
                         </div>
@@ -23,8 +22,6 @@ const HeaderUpGetbonus = () => {
                         >
                             Sign up and immediately get a bonus on your account!
                         </button>
-                    </div>
-
                     <button className={styles['getbonus__main-closeButton']}>
                         <Image 
                             src="/closeButton.svg"

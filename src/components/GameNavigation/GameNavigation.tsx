@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './GameNavigation.module.scss';
+import CategoryDropdown from '../CategoryDropdown/CategoryDropdown';
 
 const SEARCH_ICON_SRC = '/search.svg'; 
 
@@ -10,7 +11,6 @@ interface CategoryItem {
   src: string;
   alt: string;
 }
-
 
 const gameTypes: CategoryItem[] = [
   { id: 'all', label: 'All categories', src: '/all.svg', alt: 'all' },
@@ -23,7 +23,6 @@ const gameTypes: CategoryItem[] = [
   { id: 'branded', label: 'Branded', src: '/branded.svg', alt: 'branded' },
   { id: 'lobby', label: 'Lobby', src: '/exclusive.svg', alt: 'lobby' },
 ];
-
 
 const popularGames: CategoryItem[] = [
   { id: 'new', label: 'New', src: '/new.svg', alt: 'new' },
@@ -43,6 +42,7 @@ export const GameNavigation: React.FC = () => {
   return (
     <div className={styles.container}>
 
+      {/* Sections: Hidden on Mobile (<600px) via CSS */}
       <div className={styles.section}>
         <div className={styles.title}>Game Type</div>
         <div className={styles.list}>
@@ -66,7 +66,6 @@ export const GameNavigation: React.FC = () => {
         </div>
       </div>
 
-      {/* --- Блок 2: Popular Games --- */}
       <div className={styles.section}>
         <div className={styles.title}>Popular Games</div>
         <div className={styles.list}>
@@ -90,6 +89,7 @@ export const GameNavigation: React.FC = () => {
         </div>
       </div>
 
+      {/* Search: Always visible */}
       <div className={styles.searchContainer}>
         <div className={styles.searchWrapper}>
           <div className={styles.searchIcon}>
@@ -106,6 +106,10 @@ export const GameNavigation: React.FC = () => {
             className={styles.searchInput}
           />
         </div>
+      </div>
+  
+      <div className={styles.mobileCategoryWrapper}>
+         <CategoryDropdown />
       </div>
 
     </div>

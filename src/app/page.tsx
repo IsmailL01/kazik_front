@@ -12,8 +12,23 @@ import Stages from '@/components/Stages/Stages';
 import NewsPage from '@/components/CarouselNews/CarouselNews';
 import SlotsCarousel from '@/components/SlotsCarousel/SlotsCarousel';
 import RecentWinnings from '@/components/RecentWinnings/RecentWinnings';
+import { useAppSelector } from '@/shared/lib/redux/hooks';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
+	const user = useAppSelector((state) => state.auth.user);
+	const params = useSearchParams();
+	const token = params.get('token');
+
+	useEffect(() => {
+		console.log(token, 'token');
+		if (token) {
+			localStorage.setItem('token', token);
+			window.location.href = '/';
+		}
+	}, [token]);
+
 	return (
 		<>
 			<HeaderUpGetbonus />
@@ -31,6 +46,7 @@ export default function Home() {
 					<RecentWinnings />
 				</main>
 			</div>
+
 			<Chat />
 			<Footer />
 		</>

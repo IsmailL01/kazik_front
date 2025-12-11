@@ -15,51 +15,35 @@ interface EmblaInstance {
 const myNewsList: NewsItem[] = [
   {
     id: 1,
-    stepTime: '12:00',
-    stepTitle: 'Заголовок 1',
-    description: 'Join Alice on her fantastic journey through a world of surreal art and endless possibilities...',
-    imageSrc: '/img1.jpg',
-    linkHref: '/news/my-first-news', 
+    stepTime: '11.03.2025',
+    stepTitle: "Provider's battle results",
+    description: 'What an epic battle it was! But now that we’ve caught our breath, it’s time to announce the winners.',
+    imageSrc: '/img1.jpg', // Замените на реальные пути
+    linkHref: '/news/1', 
   },
   {
     id: 2,
-    stepTime: '14:30',
-    stepTitle: 'Заголовок 2',
+    stepTime: '12.03.2025',
+    stepTitle: 'Free Spins',
     description: 'Join Alice on her fantastic journey through a world of surreal art and endless possibilities...',
     imageSrc: '/img2.jpg',
-    linkHref: '/news/second-news',
+    linkHref: '/news/2',
   },
   {
     id: 3, 
-    stepTime: '12:00',
-    stepTitle: 'Заголовок 3',
-    description: 'Join Alice on her fantastic journey through a world of surreal art and endless possibilities...',
+    stepTime: '13.03.2025',
+    stepTitle: 'Tournament Started',
+    description: 'The biggest tournament of the year has officially started. Check the leaderboard!',
     imageSrc: '/img3.jpg',
-    linkHref: '/news/my-first-news', 
+    linkHref: '/news/3', 
   },
   {
     id: 4,
-    stepTime: '12:00',
-    stepTitle: 'Заголовок 4',
-    description: 'Join Alice on her fantastic journey...',
+    stepTime: '14.03.2025',
+    stepTitle: 'New Game Release',
+    description: 'Try our latest slot game with amazing graphics and high RTP.',
     imageSrc: '/img1.jpg',
-    linkHref: '/news/my-first-news', 
-  },
-  {
-    id: 5,
-    stepTime: '14:30',
-    stepTitle: 'Заголовок 5',
-    description: 'Join Alice on her fantastic journey...',
-    imageSrc: '/img2.jpg',
-    linkHref: '/news/second-news',
-  },
-  {
-    id: 6,
-    stepTime: '14:30',
-    stepTitle: 'Заголовок 6',
-    description: 'Join Alice on her fantastic journey...',
-    imageSrc: '/img3.jpg',
-    linkHref: '/news/second-news',
+    linkHref: '/news/4', 
   },
 ];
 
@@ -76,11 +60,10 @@ export default function NewsPage() {
   }, [embla]);
 
   return (
-    <section>
+    <section className={styles.section}>
         <div className={styles.container}>
           
           <div className={styles.headerWrapper}>
-            
             <h2 className={styles.sectionTitle}>
               News
             </h2>
@@ -91,12 +74,7 @@ export default function NewsPage() {
                 className={styles.navButton} 
                 aria-label="Previous slide"
               >
-                <Image 
-                  src="/arrow-left.svg" 
-                  alt="Prev" 
-                  width={15} 
-                  height={15} 
-                />
+                <Image src="/arrow-left.svg" alt="Prev" width={15} height={15} />
               </button>
               
               <button 
@@ -104,23 +82,23 @@ export default function NewsPage() {
                 className={styles.navButton} 
                 aria-label="Next slide"
               >
-                <Image 
-                  src="/arrow-right.svg" 
-                  alt="Next" 
-                  width={15} 
-                  height={15} 
-                />
+                <Image src="/arrow-right.svg" alt="Next" width={15} height={15} />
               </button>
             </div>
-
           </div>
           
           <Carousel
             getEmblaApi={(instance) => setEmbla(instance as unknown as EmblaInstance)}
             withIndicators={false}
             withControls={false}
-            slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }} 
-            slideGap="md"
+            /* Адаптивные отступы */
+            slideGap={{ base: '10px', sm: '16px', lg: '24px' }}
+            /* Адаптивные размеры: 1 на телефоне, 2 на планшете, 3 на десктопе */
+            slideSize={{ 
+              base: '100%',        // Телефон: 1 карточка на всю ширину
+              sm: '50%',           // Планшет: 2 карточки
+              md: '33.333333%',    // Десктоп: 3 карточки
+            }} 
             classNames={{
               root: styles.carouselRoot,
             }}
