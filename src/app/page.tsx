@@ -18,13 +18,13 @@ export default function Home() {
 		<>
             
             <HeaderUpGetbonus />
-            <Header />
+            <Header /> 
 
           
             <div className={styles.wrapper}>
                 
              
-                <SlideBar />
+                <SlideBar /> 
 
               
                 <main className={styles.mainContent}>
@@ -33,12 +33,19 @@ export default function Home() {
                     <SlotsCarousel />
                     <Stages />
                     <NewsPage />
-                    <RecentWinnings />
+                    <RecentWinnings /> 
+                
                 </main>
 
-            </div>
-            <Chat />
-            <Footer />
+            
+            
+             </div>
+
+             <Chat />
+             <Footer />
+            
+
+            
 		</>
 	);
 }

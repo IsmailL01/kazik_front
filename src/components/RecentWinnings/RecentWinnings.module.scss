@@ -1,17 +1,19 @@
-// --- Переменные ---
 
-// Нечетные строки: ЦВЕТ #3C4B76 (как просили ранее)
+
+// Переменные
 $bg-row-odd: #3C4B76;      
-
-// Четные строки и Хедер: ПРОЗРАЧНЫЕ (чтобы сливались с фоном сайта)
 $bg-transparent: transparent; 
-
 $bg-row-hover: #2b3046;    
+
 $color-text-main: #ffffff;
 $color-text-dim: #8e94a8;  
 $color-primary: #3E30E9;   
 $color-green: #08DB09;     
 $color-red: #FC3039;       
+
+// Брейкпоинты
+$tablet-width: 1024px;
+$mobile-width: 600px;
 
 @mixin flex-center {
   display: flex;
@@ -19,16 +21,33 @@ $color-red: #FC3039;
   justify-content: center;
 }
 
-// --- Стили ---
-
+// --- ЕДИНЫЙ КОНТЕЙНЕР ---
 .container {
-  margin-left: 20px; 
-  margin-right: 28px;
-  width: 100%;
-  max-width: 1586px; 
+  /* Специфические отступы для десктопа */
+  margin-left: 20px;  
+  margin-right: 28px; 
+  max-width: 1586px;
+  width: calc(100% - 48px);
   
-  font-family: 'Inter', sans-serif; 
   box-sizing: border-box;
+  margin-bottom: 52px;
+  font-family: 'Inter', sans-serif; 
+
+  /* Адаптив для ноутбуков и планшетов */
+  @media (max-width: 1450px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Мобильная версия */
+  @media (max-width: $mobile-width) {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 30px;
+  }
 }
 
 .title {
@@ -37,6 +56,11 @@ $color-red: #FC3039;
   color: $color-text-main;
   margin-bottom: 24px;
   text-align: left;
+
+  @media (max-width: $mobile-width) {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
 }
 
 // --- Табы ---
@@ -44,6 +68,15 @@ $color-red: #FC3039;
   display: flex;
   gap: 12px;
   margin-bottom: 24px;
+  
+  // На мобильных даем скролл, если табы не влезают
+  @media (max-width: $mobile-width) {
+    overflow-x: auto;
+    padding-bottom: 5px; // место под скроллбар
+    &::-webkit-scrollbar {
+        display: none; 
+    }
+  }
 }
 
 .tabButton {
@@ -56,6 +89,7 @@ $color-red: #FC3039;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  white-space: nowrap;
 
   &:hover {
     color: $color-text-main;
@@ -77,24 +111,48 @@ $color-red: #FC3039;
   width: 100%;
   border-radius: 12px;
   overflow: hidden; 
-  background-color: transparent; // Фон контейнера таблицы прозрачный
+  background-color: transparent;
 }
 
-$grid-layout: minmax(100px, 1fr) minmax(100px, 1fr) minmax(80px, 1fr) 1.2fr 0.8fr 1.2fr;
+// --- GRID LAYOUTS ---
+
+// 1. Desktop: 6 колонок
+// Game | User | Time | Bet | Coeff | Payout
+$grid-desktop: 1.2fr 1fr 0.8fr 1fr 0.8fr 1fr;
+
+// 2. Tablet: 5 колонок (убираем Time)
+// Game | User | Bet | Coeff | Payout
+$grid-tablet: 1.2fr 1fr 1fr 0.8fr 1fr;
+
+// 3. Mobile: 2 колонки (как на 2 скрине)
+// Game | Payout
+$grid-mobile: 1fr 1fr;
 
 .headerRow,
 .row {
   display: grid;
-  grid-template-columns: $grid-layout;
+  grid-template-columns: $grid-desktop; // По умолчанию Desktop
   align-items: center;
   padding: 14px 20px;
+  gap: 10px;
+
+  // Tablet
+  @media (max-width: $tablet-width) {
+    grid-template-columns: $grid-tablet;
+    padding: 12px 15px;
+  }
+
+  // Mobile
+  @media (max-width: $mobile-width) {
+    grid-template-columns: $grid-mobile;
+    padding: 10px 12px;
+  }
 }
 
 // Шапка таблицы
 .headerRow {
-  // ИЗМЕНЕНИЕ: Ставим transparent, чтобы хедер сливался с фоном сайта
   background: $bg-transparent; 
-  border-bottom: 1px solid rgba($color-text-dim, 0.1); // Тонкая линия разделителя
+  border-bottom: 1px solid rgba($color-text-dim, 0.1); 
   
   .cell {
     color: $color-text-dim;
@@ -109,12 +167,10 @@ $grid-layout: minmax(100px, 1fr) minmax(100px, 1fr) minmax(80px, 1fr) 1.2fr 0.8f
   transition: background-color 0.2s; 
   cursor: default;
 
-  // 1. Нечетные (1, 3, 5...) - СЕРЫЙ/СИНИЙ БЛОК
+  // Чередование цветов
   &:nth-child(odd) {
     background-color: $bg-row-odd; 
   }
-
-  // 2. Четные (2, 4, 6...) - ПРОЗРАЧНЫЕ (сливаются с сайтом)
   &:nth-child(even) {
     background-color: $bg-transparent; 
   }
@@ -124,19 +180,37 @@ $grid-layout: minmax(100px, 1fr) minmax(100px, 1fr) minmax(80px, 1fr) 1.2fr 0.8f
   }
 }
 
-// Общие стили ячейки
+// Ячейка
 .cell {
   display: flex;
   align-items: center;
   font-size: 14px;
   white-space: nowrap; 
+  overflow: hidden;
   
   &.alignRight {
     justify-content: flex-end;
   }
 }
 
-// --- Типографика ---
+// --- Управление видимостью колонок ---
+
+/* Классы для скрытия колонок на разных устройствах */
+.colTime {
+  @media (max-width: $tablet-width) {
+    display: none; // Скрываем время на планшете
+  }
+}
+
+.colUser, 
+.colBet, 
+.colCoeff {
+  @media (max-width: $mobile-width) {
+    display: none; // Скрываем User, Bet, Coeff на телефоне
+  }
+}
+
+// --- Типографика контента ---
 
 .gameName {
   color: $color-text-main;
@@ -171,6 +245,7 @@ $grid-layout: minmax(100px, 1fr) minmax(100px, 1fr) minmax(80px, 1fr) 1.2fr 0.8f
   background: rgba(255, 255, 255, 0.05);
   padding: 4px 8px;
   border-radius: 6px;
+  font-size: 13px;
 }
 
 .amountWrapper {
@@ -180,14 +255,17 @@ $grid-layout: minmax(100px, 1fr) minmax(100px, 1fr) minmax(80px, 1fr) 1.2fr 0.8f
   font-weight: 600;
   color: $color-text-main; 
 
-  &.win {
-    color: $color-green;
-
+  &.win { color: $color-green; }
+  &.loss { color: $color-red; }
+  
+  @media (max-width: $mobile-width) {
+    font-size: 13px;
+    gap: 4px;
   }
+}
 
-  &.loss {
-    color: $color-red;
-  }
+.amountValue {
+    white-space: nowrap;
 }
 
 .currencyIcon {
@@ -200,44 +278,5 @@ $grid-layout: minmax(100px, 1fr) minmax(100px, 1fr) minmax(80px, 1fr) 1.2fr 0.8f
     width: 100%;
     height: 100%;
     object-fit: contain;
-  }
-}
-
-// --- Адаптивность ---
-@media (max-width: 900px) {
-  $mobile-grid-layout: 1fr 1fr 0.8fr 1fr;
-
-  .headerRow,
-  .row {
-    grid-template-columns: $mobile-grid-layout;
-    padding: 12px 10px;
-  }
- 
-  .cell:nth-child(2),
-  .cell:nth-child(3) {
-    display: none;
-  }
-
-  .title {
-    font-size: 20px;
-  }
-
-  .tabs {
-    overflow-x: auto;
-    padding-bottom: 5px;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 500px) {
-  $xs-grid-layout: 1fr 1fr 1fr;
-  .headerRow,
-  .row {
-    grid-template-columns: $xs-grid-layout;
-  }
-  .cell:nth-child(5) { 
-    display: none;
   }
 }

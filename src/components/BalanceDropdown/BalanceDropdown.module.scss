@@ -1,8 +1,7 @@
-
 .wrapper {
     position: relative;
     display: inline-block;
-    z-index: 10;
+    z-index: 20;
 }
 
 .balanceButton {
@@ -12,36 +11,69 @@
     color: #FFFFFF; 
     border: rem(2) solid transparent;
     border-radius: rem(100);
+    
     background: 
         linear-gradient(#2A3C73, #2A3C73) padding-box, 
         linear-gradient(165deg, #C7F7FC 0%, #9C8D84 55%, #CA5CF7 100%) border-box;
+    
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-        column-gap: rem(5);  
-        padding: rem(15) rem(22) rem(15) rem(33);
-
+    column-gap: rem(8); 
+    
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     white-space: nowrap; 
+
+    padding: rem(14) rem(42); 
 
     &:hover {
         opacity: 0.9;
     }
+
+    @media (max-width: 1450px) {
+        padding: rem(12) rem(30);
+    }
+
+    @media (max-width: 768px) {
+        padding: rem(10) rem(20);
+        border-width: rem(1);
+    }
+    // На 600px не меняем кнопку баланса, она остается основной
 }
 
 .balanceValue { 
-
     display: flex;
     align-items: center;
     justify-content: center;
     column-gap: rem(8); 
-    
     color: #FFFFFF;
-    font-size: rem(18);
+    font-size: rem(18); 
     font-weight: 700;
     line-height: 1;
+
+    @media (max-width: 768px) {
+        font-size: rem(16); 
+        column-gap: rem(6);
+    }
+}
+
+.balanceText {
+    display: block;
+    @media (max-width: 768px) {
+        max-width: rem(90);       
+        overflow: hidden;
+        text-overflow: ellipsis;  
+        white-space: nowrap;
+    }
+}
+
+.currencyIcon {
+    @media (max-width: 768px) {
+        width: rem(18);
+        height: rem(18);
+    }
 }
 
 .arrowIcon {
@@ -49,19 +81,21 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
-    
-
     width: rem(28);
     height: rem(28);
-}
 
+    @media (max-width: 768px) {
+        width: rem(20);
+        height: rem(20);
+    }
+}
 
 .active .arrowIcon {
     transform: rotate(180deg);
 }
 
 
-
+// --- DROPDOWN LIST ---
 .dropdownList {
     position: absolute;
     top: calc(100% + rem(8)); 
@@ -76,8 +110,49 @@
     padding: rem(5) 0;
     display: flex;
     flex-direction: column;
+    z-index: 30;
+
+    @media (max-width: 768px) {
+        width: rem(260); 
+        right: rem(-10);
+    }
 }
 
+// --- МОБИЛЬНАЯ КНОПКА DEPOSIT ВНУТРИ СПИСКА ---
+.mobileDepositWrapper {
+    display: none; // Скрыта по умолчанию
+    padding: rem(10) rem(20);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: rem(5);
+
+    // Показываем только на 600px и меньше
+    @media (max-width: 600px) {
+        display: block;
+    }
+}
+
+.mobileDepositBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: rem(12);
+    border-radius: rem(100);
+    // Градиент как у оригинальной кнопки
+    background: linear-gradient(90deg, #3E45BE 0%, #795DD7 100%);
+    border: rem(1) solid #C7F5FC;
+    color: #FFFFFF;
+    font-size: rem(16);
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+// --- ЭЛЕМЕНТЫ СПИСКА ---
 .dropdownItem {
     display: flex;
     align-items: center;
@@ -104,6 +179,9 @@
     color: #FFFFFF;
     font-size: rem(16);
     font-weight: 500;
+    @media (max-width: 768px) {
+        font-size: rem(14);
+    }
 }
 
 .itemCurrency {

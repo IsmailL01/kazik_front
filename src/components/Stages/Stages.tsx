@@ -83,7 +83,13 @@ const Stages = () => {
                         const isActive = activeStepId === item.id;
 
                         return (
-                            <div key={item.id} className={styles.card}>
+                            <div 
+                                key={item.id} 
+                                className={`${styles.card} ${isActive ? styles.disabled : ''}`}
+                            >
+                                {/* Порядок в HTML: Header -> Image -> Desc -> Button */}
+                                {/* Grid-areas в CSS переставят их местами на мобильном */}
+                                
                                 <div className={styles.cardHeader}>
                                     <span className={styles.stepNum}>{item.stepNumber}</span>
                                     <span className={styles.stepTitle}>{item.stepTitle}</span>
@@ -96,18 +102,21 @@ const Stages = () => {
                                         width={255} 
                                         height={240}
                                         className={styles.icon3d}
+                                        // style={{ width: 'auto', height: 'auto' }} // Можно добавить, если картинки плющит
                                     />
                                 </div>
 
                                 <p className={styles.description}>
                                     {item.description}
                                 </p>
+                                
                                 <Link 
                                     href={item.linkHref} 
-                                    className={`${styles.lobbyButton} ${isActive ? styles.disabled : ''}`}
+                                    className={styles.lobbyButton}
                                     onClick={() => handleStepClick(item.id)}
                                     aria-disabled={isActive}
                                 >
+                                    {/* На скриншоте везде написано Lobby, но я оставил ваш текст */}
                                     {isActive ? 'Active' : item.buttondescription}
                                 </Link>
                             </div>

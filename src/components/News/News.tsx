@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './New.module.scss';
 
-
 export interface NewsItem {
     id: number;
     stepTime: string | number; 
@@ -29,11 +28,13 @@ const News: React.FC<NewsProps> = ({ item }) => {
                 </div>
                 
                 <div className={styles.imageWrapper}>
+                    {/* Используем width/height auto style для резиновости */}
                     <Image 
                         src={item.imageSrc} 
                         alt={item.stepTitle}
                         width={511} 
                         height={143}
+                        style={{ width: '100%', height: 'auto' }} 
                         className={styles.image}
                     />
                 </div>

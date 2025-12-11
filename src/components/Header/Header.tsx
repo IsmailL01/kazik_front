@@ -1,7 +1,12 @@
+'use client'; 
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Header.module.scss';
 import BalanceDropdown from '../BalanceDropdown/BalanceDropdown';
+import BuregMenu from '../BuregMenu/BuregMenu'; 
+import NotificationsDropdown from '../NotificationsDropdown/NotificationsDropdown';
 
 
 const USER_ACTIONS = [
@@ -15,15 +20,7 @@ const USER_ACTIONS = [
         height: 32,
         wrapperClass: 'header__wrapper-like'
     },
-    {
-        id: 'bell',
-        tag: 'button', 
-        src: '/bell.svg',
-        alt: 'Notifications',
-        width: 29,
-        height: 29,
-        wrapperClass: 'header__wrapper-bell'
-    },
+    // Колокольчик удален из конфига, он вставляется вручную в JSX
     {
         id: 'profile',
         tag: 'link',
@@ -38,23 +35,14 @@ const USER_ACTIONS = [
 ];
 
 const Header = () => {
-    return (
-        <div className={styles.header}>
-            <div className={styles.header__wrapper}>
-                {/* Логотип */}
-                <div className={styles['header__wrapper-logoImg']}>
-                    <Image
-                        src="/logoMain.svg"
-                        alt='winvube_logo'
-                        width={67}
-                        height={58}
-                        priority
-                    />
-                    <span className={styles['header__wrapper-logoName']}>WinVibe</span>
-                </div>
+    // Состояние: открыто меню или нет
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-                <div className={styles['header__wrapper-buttonList']}>
-                    
+    return (
+        <>
+            <header className={styles.header}>
+                <div className={styles.header__wrapper}>
+                       
                     {/* --- Блок для НЕ авторизованного пользователя (закомментирован) --- */}
                     {/* 
                     <Link href="" className={styles['header__wrapper-login']}>
@@ -68,49 +56,96 @@ const Header = () => {
                     {/* --- Блок для авторизованного пользователя --- */}
                     
                     {/* Кнопка баланса (оставили как есть, так как структура уникальна) */}
-                     
-                    <BalanceDropdown />
+                    {/* ЛЕВЫЙ БЛОК: Бургер + Логотип */}
+                    <div className={styles['header__wrapper-logoImg']}>
+                        
+                        {/* Бургер - добавили onClick */}
+                        <div 
+                            className={styles['header__wrapper-burgerMenu']}
+                            onClick={() => setIsMenuOpen(true)} // Открываем меню
+                            role="button"
+                            tabIndex={0}
+                        >
+                            <Image
+                                src="/burgerMenu.svg"
+                                alt='menu'
+                                width={44}
+                                height={44}
+                                priority
+                            />   
+                        </div>
 
-                    <Link href="" className={styles['header__wrapper-balanceup']}>
-                        Deposit
-                    </Link>
+                        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+                            <Image
+                                src="/logoMain.svg"
+                                alt='winvube_logo'
+                                width={67}
+                                height={58}
+                                priority
+                                className={styles['header__wrapper-logoIcon']}
+                            />
+                            <span className={styles['header__wrapper-logoName']}>WinVibe</span>
+                        </Link>
+                    </div>
 
-                 
-                    <div className={styles['header__wrapper-headerMenu']}>
-                        {USER_ACTIONS.map((item) => {
-                            
-                            const IconImage = (
-                                <Image
-                                    src={item.src}
-                                    alt={item.alt}
-                                    width={item.width}
-                                    height={item.height}
-                                    className={item.imgClass ? styles[item.imgClass] : undefined}
-                                    priority
-                                />
-                            );
+                    {/* ПРАВЫЙ БЛОК: Кнопки */}
+                    <div className={styles['header__wrapper-buttonList']}>
+                        
+                        <BalanceDropdown />
 
-                            return item.tag === 'link' ? (
+                        <Link href="" className={styles['header__wrapper-balanceup']}>
+                            Deposit
+                        </Link>
+
+                        <div className={styles['header__wrapper-headerMenu']}>
+                            {/* 1. Рендерим Лайк (фильтруем из массива) */}
+                            {USER_ACTIONS.filter(item => item.id === 'like').map((item) => (
                                 <Link 
                                     key={item.id} 
                                     href={item.href || ''} 
                                     className={styles[item.wrapperClass]}
                                 >
-                                    {IconImage}
+                                    <Image
+                                        src={item.src}
+                                        alt={item.alt}
+                                        width={item.width}
+                                        height={item.height}
+                                        priority
+                                    />
                                 </Link>
-                            ) : (
-                                <button 
+                            ))}
+
+                            {/* 2. Вставляем компонент Колокольчика */}
+                            <NotificationsDropdown />
+
+                            {/* 3. Рендерим Профиль (фильтруем из массива) */}
+                            {USER_ACTIONS.filter(item => item.id === 'profile').map((item) => (
+                                <Link 
                                     key={item.id} 
+                                    href={item.href || ''} 
                                     className={styles[item.wrapperClass]}
                                 >
-                                    {IconImage}
-                                </button>
-                            );
-                        })}
+                                    <Image
+                                        src={item.src}
+                                        alt={item.alt}
+                                        width={item.width}
+                                        height={item.height}
+                                        className={item.imgClass ? styles[item.imgClass] : undefined}
+                                        priority
+                                    />
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </header>
+
+            {/* Вставляем компонент меню, передаем состояние */}
+            <BuregMenu 
+                isOpen={isMenuOpen} 
+                onClose={() => setIsMenuOpen(false)} 
+            />
+        </>
     );
 };
 
