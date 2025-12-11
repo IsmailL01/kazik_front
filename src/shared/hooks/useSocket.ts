@@ -10,8 +10,8 @@ export const useSocket = (token?: string) => {
 	useEffect(() => {
 		if (!socket) {
 			socket = io('http://localhost:8000', {
-				// auth: { token },
-				// transports: ['websocket'],
+				auth: { token },
+				transports: ['websocket'],
 			});
 		}
 

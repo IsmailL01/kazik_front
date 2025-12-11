@@ -1,9 +1,27 @@
+// Updated: public-chat/ui/index.tsx
 'use client';
 
-import { Box, Flex, Group, Select, SelectProps, Title } from '@mantine/core';
+import {
+	Box,
+	Flex,
+	Group,
+	Select,
+	SelectProps,
+	Title,
+	Text,
+	Button,
+	TextInput,
+} from '@mantine/core';
 import Image from 'next/image';
 import styles from './style.module.scss';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSocket } from '@/shared/hooks/useSocket';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/redux/hooks';
+import { RootState } from '@/shared/lib/redux/store';
+import { setOpenChatType } from '@/widgets/chat/model/slice';
+import { OpenChatTypeEnum } from '@/widgets/chat/model/slice';
+
+const selectUser = (state: RootState) => state.auth?.user; // Example: { id: number, name: string }
 
 // Данные селекта
 const languages = [
@@ -28,10 +46,74 @@ const renderSelectOption: SelectProps['renderOption'] = ({ option }) => {
 	);
 };
 
+interface Message {
+	id: number;
+	content: string;
+	senderId: number;
+	sender?: { name: string };
+	createdAt: string;
+}
+
 const PublicChat = () => {
 	const [currentLang, setCurrentLang] = useState('us');
+	const [messages, setMessages] = useState<Message[]>([]);
+	const [inputValue, setInputValue] = useState('');
+	const [isJoined, setIsJoined] = useState(false);
+	const messagesEndRef = useRef<HTMLDivElement>(null);
+	const socket = useSocket();
+	const dispatch = useAppDispatch();
+	const user = useAppSelector(selectUser); // Assume user from auth
+	const isAuthenticated = !!user?.id;
 
 	const selected = languages.find((l) => l.value === currentLang);
+
+	useEffect(() => {
+		if (!socket || !isAuthenticated) return;
+
+		const handleNewMessage = (message: Message) => {
+			setMessages((prev) => [...prev, message]);
+		};
+
+		const handleHistory = (history: Message[]) => {
+			setMessages(history);
+			setIsJoined(true);
+		};
+
+		socket.on('newMessage', handleNewMessage);
+		socket.on('history', handleHistory);
+
+		// Join public room on mount if auth
+		socket.emit('joinPublic', user.id);
+
+		return () => {
+			socket.off('newMessage', handleNewMessage);
+			socket.off('history', handleHistory);
+			socket.emit('leavePublic'); // Optional: implement leave in backend
+		};
+	}, [socket, user?.id, isAuthenticated]);
+
+	useEffect(() => {
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages]);
+
+	const handleSendMessage = () => {
+		if (!inputValue.trim() || !socket || !isAuthenticated) return;
+		socket.emit('sendPublicMessage', { userId: user.id, content: inputValue });
+		setInputValue('');
+	};
+
+	if (!isAuthenticated) {
+		return (
+			<Box className={styles.publicChat}>
+				<Flex justify='center' align='center' direction='column' h='100%'>
+					<Text className={styles.publicChatAuthPrompt}>
+						Please log in to join the public chat.
+					</Text>
+					<Button onClick={() => dispatch(setOpenChatType(null))}>Close</Button>
+				</Flex>
+			</Box>
+		);
+	}
 
 	return (
 		<Box className={styles.publicChat}>
@@ -46,7 +128,7 @@ const PublicChat = () => {
 						style={{ height: 80, width: 80 }}
 					/>
 					<Title fz={18} fw={500} className={styles.publicChatUserName}>
-						Dmitry M.
+						Public Chat
 					</Title>
 				</Flex>
 
@@ -73,7 +155,70 @@ const PublicChat = () => {
 				</Flex>
 			</Flex>
 
-			<Box></Box>
+			<Box className={styles.publicChatMessages}>
+				{!isJoined ? (
+					<Text color='white' ta='center'>
+						Connecting...
+					</Text>
+				) : messages.length === 0 ? (
+					<Text color='white' ta='center'>
+						No messages yet. Start the conversation!
+					</Text>
+				) : (
+					messages.map((msg) => (
+						<Flex
+							key={msg.id}
+							className={`${styles.publicChatMessage} ${
+								msg.senderId === user.id ? styles.publicChatMessageUser : ''
+							}`}
+						>
+							{msg.senderId !== user.id && (
+								<Image
+									src='/default-avatar.png'
+									alt='sender'
+									width={30}
+									height={30}
+									style={{ borderRadius: '50%' }}
+								/>
+							)}
+							<Box>
+								<Text className={styles.publicChatMessageSender}>
+									{msg.sender?.name || 'Anonymous'}
+								</Text>
+								<Text className={styles.publicChatMessageContent}>
+									{msg.content}
+								</Text>
+							</Box>
+							{msg.senderId === user.id && (
+								<Image
+									src='/default-avatar.png'
+									alt='you'
+									width={30}
+									height={30}
+									style={{ borderRadius: '50%' }}
+								/>
+							)}
+						</Flex>
+					))
+				)}
+				<div ref={messagesEndRef} />
+			</Box>
+
+			<Flex className={styles.publicChatInputWrapper}>
+				<TextInput
+					className={styles.publicChatInput}
+					placeholder='Type a message...'
+					value={inputValue}
+					onChange={(e) => setInputValue(e.target.value)}
+					onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+				/>
+				<Button
+					className={styles.publicChatSendButton}
+					onClick={handleSendMessage}
+				>
+					Send
+				</Button>
+			</Flex>
 		</Box>
 	);
 };
