@@ -1,0 +1,28 @@
+// src/app/faq/FAQPage.module.scss
+
+.faqWrapper {
+  display: flex;          
+  align-items: flex-start; // Выравнивание элементов вверху
+  width: 100%;
+ // Пример: ограничение ширины контента
+  margin: 0 auto;         
+  position: relative;
+  // Убираем общий padding, чтобы SlideBar прилегал к краю, 
+  // а padding добавим к основному контенту.
+}
+
+.faqContent {
+    flex-grow: 1; // Занимает оставшееся пространство
+    display: flex;
+    flex-direction: column;
+    width: 100%; // Гарантирует, что контент займет всю ширину после SlideBar
+    padding: 20px 40px; // Отступы вокруг контента FAQ
+}
+
+.pageTitle {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    align-self: flex-start; 
+}

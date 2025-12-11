@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.scss';
 import '../shared/styles/globals.scss';
-
+import '@mantine/carousel/styles.css';
 import '@mantine/core/styles.css';
 import {
 	ColorSchemeScript,
