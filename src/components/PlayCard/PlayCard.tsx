@@ -1,6 +1,6 @@
 'use client'; 
 
-import React from 'react';
+import React, { useState } from 'react'; 
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './PlayCard.module.scss';
@@ -18,68 +18,83 @@ interface PlayCardProps {
 }
 
 const PlayCard: React.FC<PlayCardProps> = ({ item, onInfoClick }) => {
-    
+    const [isLiked, setIsLiked] = useState(false);
+
     const handleInfoClick = (e: React.MouseEvent) => {
         e.preventDefault(); 
         e.stopPropagation(); 
         onInfoClick(item.id);
     };
 
+    const handleLikeClick = (e: React.MouseEvent) => {
+        e.preventDefault(); 
+        e.stopPropagation(); 
+        setIsLiked(!isLiked);
+    };
+
     return (
         <div className={styles.card}>
             <Link href={item.linkHref} className={styles.linkWrapper}>
                 <div className={styles.imageContainer}>
-                    {/* Основная картинка слота */}
                     <Image 
                         src={item.imageSrc} 
                         alt={item.title || 'Slot Game'} 
-                        width={240} 
-                        height={300}
+                        fill
+                        /* 
+                           sizes="
+                             (max-width: 768px) 33vw,  <- На телефоне 3 карточки (примерно 33% экрана каждая)
+                             (max-width: 1200px) 25vw, <- На планшете/мелком ноуте
+                             20vw                      <- На больших экранах
+                           "
+                        */
+                        sizes="(max-width: 768px) 33vw, (max-width: 1200px) 25vw, 20vw"
                         className={styles.image}
                     />
 
-                    {/* Оверлей: Затемнение + Кнопка Play + Сердечко */}
                     <div className={styles.overlay}>
-                        
-                        {/* Иконка сердечка (слева сверху) */}
-                        <div className={styles.heartIcon}>
-                            <Image 
-                                src="/icons/heart.svg" // ВСТАВЬТЕ ВАШ ПУТЬ К ИКОНКЕ СЕРДЦА
-                                alt="Like" 
-                                width={24} 
-                                height={24} 
-                            />
+                        <div 
+                            className={styles.heartIcon} 
+                            onClick={handleLikeClick} 
+                        >
+                            {/* SVG иконки тоже делаем резиновыми внутри контейнера */}
+                            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                <Image 
+                                    src={isLiked ? "/heart-filled.svg" : "/heart.svg"} 
+                                    alt={isLiked ? "Unlike" : "Like"} 
+                                    fill 
+                                    className={isLiked ? styles.likedHeart : ''}
+                                />
+                            </div>
                         </div>
 
-                        {/* Центральная зеленая кнопка Play */}
                         <div className={styles.playButton}>
                             <Image 
-                                src="/icons/play-triangle.svg" // ВСТАВЬТЕ ВАШ ПУТЬ К ИКОНКЕ ТРЕУГОЛЬНИКА
+                                src="/play-triangle.svg" 
                                 alt="Play" 
                                 width={16} 
                                 height={16} 
                             />
                             <span className={styles.playText}>Play</span>
                         </div>
-
                     </div>
                 </div>
             </Link>
 
-            {/* Кнопка с вопросом (справа сверху) */}
             <button 
                 className={styles.infoButton} 
                 onClick={handleInfoClick}
                 type="button"
                 aria-label="Game Info"
             >
-                <Image 
-                    src="/question.svg" 
-                    alt="Info" 
-                    width={30} 
-                    height={30} 
-                    className={styles.iconImage}
-                />
+                {/* Иконка вопроса */}
+                <div style={{ position: 'relative', width: '60%', height: '60%' }}>
+                    <Image 
+                        src="/question.svg" 
+                        alt="Info" 
+                        fill
+                        className={styles.iconImage}
+                    />
+                </div>
             </button>
         </div>
     );

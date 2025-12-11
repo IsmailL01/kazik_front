@@ -11,24 +11,27 @@ import GameNavigation from '@/components/GameNavigation/GameNavigation';
 import Stages from '@/components/Stages/Stages';
 import NewsPage from '@/components/CarouselNews/CarouselNews';
 import SlotsCarousel from '@/components/SlotsCarousel/SlotsCarousel';
+import RecentWinnings from '@/components/RecentWinnings/RecentWinnings';
 
 export default function Home() {
 	return (
 		<>
 			<HeaderUpGetbonus />
 			<Header />
-			{/* 
+
 			<div className={styles.wrapper}>
 				<SlideBar />
 
 				<main className={styles.mainContent}>
 					<ImageCarousel />
-					<SlotsCarousel />
 					<GameNavigation />
+					<SlotsCarousel />
 					<Stages />
 					<NewsPage />
+					<RecentWinnings />
 				</main>
-			</div> */}
+			</div>
+
 			<Chat />
 			<Footer />
 		</>
