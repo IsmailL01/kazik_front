@@ -34,66 +34,39 @@ const PlayCard: React.FC<PlayCardProps> = ({ item, onInfoClick }) => {
 
     return (
         <div className={styles.card}>
+            {/* Оборачиваем в Link для перехода на страницу слота */}
             <Link href={item.linkHref} className={styles.linkWrapper}>
                 <div className={styles.imageContainer}>
                     <Image 
                         src={item.imageSrc} 
                         alt={item.title || 'Slot Game'} 
                         fill
-                        /* 
-                           sizes="
-                             (max-width: 768px) 33vw,  <- На телефоне 3 карточки (примерно 33% экрана каждая)
-                             (max-width: 1200px) 25vw, <- На планшете/мелком ноуте
-                             20vw                      <- На больших экранах
-                           "
-                        */
                         sizes="(max-width: 768px) 33vw, (max-width: 1200px) 25vw, 20vw"
                         className={styles.image}
                     />
 
                     <div className={styles.overlay}>
-                        <div 
-                            className={styles.heartIcon} 
-                            onClick={handleLikeClick} 
-                        >
-                            {/* SVG иконки тоже делаем резиновыми внутри контейнера */}
+                        <div className={styles.heartIcon} onClick={handleLikeClick}>
                             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                                 <Image 
                                     src={isLiked ? "/heart-filled.svg" : "/heart.svg"} 
-                                    alt={isLiked ? "Unlike" : "Like"} 
+                                    alt="Like" 
                                     fill 
-                                    className={isLiked ? styles.likedHeart : ''}
                                 />
                             </div>
                         </div>
 
                         <div className={styles.playButton}>
-                            <Image 
-                                src="/play-triangle.svg" 
-                                alt="Play" 
-                                width={16} 
-                                height={16} 
-                            />
+                            <Image src="/play-triangle.svg" alt="Play" width={16} height={16} />
                             <span className={styles.playText}>Play</span>
                         </div>
                     </div>
                 </div>
             </Link>
 
-            <button 
-                className={styles.infoButton} 
-                onClick={handleInfoClick}
-                type="button"
-                aria-label="Game Info"
-            >
-                {/* Иконка вопроса */}
+            <button className={styles.infoButton} onClick={handleInfoClick} type="button">
                 <div style={{ position: 'relative', width: '60%', height: '60%' }}>
-                    <Image 
-                        src="/question.svg" 
-                        alt="Info" 
-                        fill
-                        className={styles.iconImage}
-                    />
+                    <Image src="/question.svg" alt="Info" fill className={styles.iconImage} />
                 </div>
             </button>
         </div>

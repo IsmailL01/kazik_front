@@ -1,5 +1,3 @@
-
-
 // Переменные
 $bg-row-odd: #3C4B76;      
 $bg-transparent: transparent; 
@@ -11,9 +9,9 @@ $color-primary: #3E30E9;
 $color-green: #08DB09;     
 $color-red: #FC3039;       
 
-// Брейкпоинты
+// Брейкпоинты (Обновил mobile-width, чтобы соответствовал второму коду)
 $tablet-width: 1024px;
-$mobile-width: 600px;
+$mobile-width: 767px; 
 
 @mixin flex-center {
   display: flex;
@@ -43,22 +41,34 @@ $mobile-width: 600px;
   }
 
   /* Мобильная версия */
-  @media (max-width: $mobile-width) {
+  @media (max-width: 600px) {
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 30px;
   }
 }
 
+// --- ЗАГОЛОВОК (Исправлен на основе второго кода) ---
 .title {
-  font-size: 36px;
-  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap; 
+  
+  font-size: 36px; 
+  font-weight: 700;
   color: $color-text-main;
-  margin-bottom: 24px;
-  text-align: left;
+  
+  margin: 0;
+  margin-bottom: 24px; // Оставляем отступ снизу до таблицы/табов
 
+  /* Адаптив с планшета (как во втором коде) */
+  @media (max-width: $tablet-width) {
+    font-size: 28px;
+  }
+
+  /* Адаптив с мобильного (как во втором коде) */
   @media (max-width: $mobile-width) {
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 16px;
   }
 }
@@ -72,7 +82,7 @@ $mobile-width: 600px;
   // На мобильных даем скролл, если табы не влезают
   @media (max-width: $mobile-width) {
     overflow-x: auto;
-    padding-bottom: 5px; // место под скроллбар
+    padding-bottom: 5px; 
     &::-webkit-scrollbar {
         display: none; 
     }
@@ -117,21 +127,18 @@ $mobile-width: 600px;
 // --- GRID LAYOUTS ---
 
 // 1. Desktop: 6 колонок
-// Game | User | Time | Bet | Coeff | Payout
 $grid-desktop: 1.2fr 1fr 0.8fr 1fr 0.8fr 1fr;
 
-// 2. Tablet: 5 колонок (убираем Time)
-// Game | User | Bet | Coeff | Payout
+// 2. Tablet: 5 колонок
 $grid-tablet: 1.2fr 1fr 1fr 0.8fr 1fr;
 
-// 3. Mobile: 2 колонки (как на 2 скрине)
-// Game | Payout
+// 3. Mobile: 2 колонки
 $grid-mobile: 1fr 1fr;
 
 .headerRow,
 .row {
   display: grid;
-  grid-template-columns: $grid-desktop; // По умолчанию Desktop
+  grid-template-columns: $grid-desktop; 
   align-items: center;
   padding: 14px 20px;
   gap: 10px;
@@ -195,10 +202,9 @@ $grid-mobile: 1fr 1fr;
 
 // --- Управление видимостью колонок ---
 
-/* Классы для скрытия колонок на разных устройствах */
 .colTime {
   @media (max-width: $tablet-width) {
-    display: none; // Скрываем время на планшете
+    display: none; 
   }
 }
 
@@ -206,7 +212,7 @@ $grid-mobile: 1fr 1fr;
 .colBet, 
 .colCoeff {
   @media (max-width: $mobile-width) {
-    display: none; // Скрываем User, Bet, Coeff на телефоне
+    display: none; 
   }
 }
 
