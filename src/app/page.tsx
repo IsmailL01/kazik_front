@@ -17,7 +17,7 @@ export default function Home() {
 		<>
 			<HeaderUpGetbonus />
 			<Header />
-
+			{/* 
 			<div className={styles.wrapper}>
 				<SlideBar />
 
@@ -28,7 +28,7 @@ export default function Home() {
 					<Stages />
 					<NewsPage />
 				</main>
-			</div>
+			</div> */}
 			<Chat />
 			<Footer />
 		</>

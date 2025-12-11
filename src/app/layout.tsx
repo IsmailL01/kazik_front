@@ -4,12 +4,12 @@ import './globals.scss';
 import '../shared/styles/globals.scss';
 
 import '@mantine/core/styles.css';
-
 import {
 	ColorSchemeScript,
 	MantineProvider,
 	mantineHtmlProps,
 } from '@mantine/core';
+
 import StoreProvider from '@/shared/lib/redux/store-provider';
 
 const proximaNova = localFont({
